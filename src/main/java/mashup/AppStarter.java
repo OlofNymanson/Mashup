@@ -1,10 +1,7 @@
 package mashup;
 
-public class AppStarter {
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		System.out.println("Hello, world");
+public class AppStarter {	
+	public static void main(String[] args){
+		System.out.println("hello world");
 	}
-
 }
