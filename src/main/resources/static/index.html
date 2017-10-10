@@ -2,11 +2,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <title>Insert title here</title>
 
 <script type="text/javascript">
 	function getMovieInfo(movieTitle){
+		/*
 		$('#tableHeader').html('Sökresultat för: ' + movieTitle);
 		
 		htmlMovieTable = '';
@@ -14,44 +16,67 @@
 			htmlMovieTable += '<tr><th><img src="https://images-na.ssl-images-amazon.com/images/M/MV5BNTM3OTc0MzM2OV5BMl5BanBnXkFtZTYwNzUwMTI3._V1_UX182_CR0,0,182,268_AL_.jpg"></img></th><td>FILMTITLE</td></tr>'
 		}
 		$('#movieTable').html(htmlMovieTable);
+		*/
+		
+		$.ajax({
+			url: 'http://www.omdbapi.com/?t='+movieTitle+'&apikey=bbba3eae',
+			 headers: {"Accept": "application/json"}
+		}).done(function(data){
+			title = data['Title'];
+			$('#tableHeader').html('Sökresultat för: ' + title);
+		});
+		
+		getMoviePoster(movieTitle);
+	}
+	
+	function getMoviePoster(movieTitle){
+		$.ajax({
+			url: 'http://omdbapi.com/?t='+movieTitle+'&apikey=bbba3eae',
+			 headers: {"Accept": "application/json"}
+		}).done(function(data){
+			poster = data['Poster'];
+		 	row = '<tr><th><img src="' + poster +'"></img></th><td>' + movieTitle + '</td></tr>'
+			$('#movieTable').html(row);
+		});
 	}
 </script>
 
 <style type="text/css">
-	body {
-		text-align: center;
-	}
+body {
+	text-align: center;
+}
 
-	#movieTable {
-		border-collapse: collapse;
-		border-style: solid;
-		border-color: black;
-		border-width: 1px;
-		position: relative;
-		left: 37%;
-	}
+#movieTable {
+	border-collapse: collapse;
+	border-style: solid;
+	border-color: black;
+	border-width: 1px;
+	position: relative;
+	left: 37%;
+}
 
-	#movieTable th, #movieTable td {
-		border-bottom: solid 1px black;
-		padding: 5px;
-	}
+#movieTable th, #movieTable td {
+	border-bottom: solid 1px black;
+	padding: 5px;
+}
 
-	#movieTable th, #movieTable td {
-		max-width: 250px;
-	}
+#movieTable th, #movieTable td {
+	max-width: 250px;
+}
 </style>
 </head>
 
 <body>
 	<h1>Filmälskaren</h1>
 	<p>
-		Välkommen till Filmälskaren!<br>
-		Ange en film nedan för att få handling och trailer!
+		Välkommen till Filmälskaren!<br> Ange en film nedan för att få
+		handling och trailer!
 	</p>
-	
+
 	<input type="text/input" id="textbox1"></input>
-	<button type="button" id="btn1" onclick="getMovieInfo(document.getElementById('textbox1').value)" >SÖK</button>
-	
+	<button type="button" id="btn1"
+		onclick="getMovieInfo(document.getElementById('textbox1').value)">SÖK</button>
+
 	<h2 id="tableHeader"></h2>
 	<table id="movieTable">
 	</table>
