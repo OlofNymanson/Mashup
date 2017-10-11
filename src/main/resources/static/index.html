@@ -4,9 +4,10 @@
 <meta charset="UTF-8">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-<title>Filmälskaren</title>
 
-<script src="js.js"></script>
+<title>Filmälskaren</title>
+<script src="indexJS.js"></script>
+
 
 <style type="text/css">
 body {
@@ -28,11 +29,11 @@ body {
 	max-width: 250px;
 }
 
-#movieTable td{
+#movieTable td {
 	width: 200px;
 }
 
-img{
+img {
 	height: 300px;
 	width: 200px;
 }
@@ -40,20 +41,46 @@ img{
 #movieTable th, #movieTable td {
 	max-width: 250px;
 }
+
+#moviePoster {
+	text-align: left;
+}
+
+h5 {
+	text-align: left;
+}
 </style>
 </head>
 <body>
-	<h1>Filmälskaren</h1>
-	<p>
-		Välkommen till Filmälskaren!<br> Ange en film nedan för att få
-		handling och trailer!
-	</p>
+	<section id="frontPage">
+		<h1>Filmälskaren</h1>
+		<p>
+			Välkommen till Filmälskaren!<br> Ange en film nedan för att få
+			handling och trailer!
+		</p>
 
-	<input type="text/input" id="textbox1"></input>
-	<button type="button" id="btn1"
-		onclick="getMovieTitle(document.getElementById('textbox1').value)">SÖK</button>
-	<h2 id="tableHeader"></h2>
-	<table id="movieTable">
-	</table>
+		<input type="text/input" id="textbox1"></input>
+		<button type="button" id="btn1"
+			onclick="getMovieTitle(document.getElementById('textbox1').value)">SÖK</button>
+		<h2 id="tableHeader"></h2>
+		<table id="movieTable">
+		</table>
+	</section>
+
+	<section id="infoPage" style="display: none;">
+		<section id="moviePoster"></section>
+
+		<div id="player"></div>
+		
+		<h5 id="movieTitle"></h5>
+		<h5 id="movieGenre"></h5>
+		<h5 id="movieYear"></h5>
+		<h5 id="movieLength"></h5>
+		<h5 id="movieRating"></h5>
+		<h5>Handling:</h5>
+		<p id="moviePlot"></p>
+
+		<button id="backToSearch" onclick="hideInfoShowSearch()">Tillbaka</button>
+	</section>
 </body>
 </html>
