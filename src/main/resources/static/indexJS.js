@@ -55,6 +55,7 @@ function getAllInfo(movieTitle) {
 		$('#movieRating').html('IMDB-betyg: ' + rating);
 		$('#moviePlot').html(plot);
 
+		setHttpURL(title);
 		getXML();
 
 		$('#infoPage').show(1000);
@@ -64,17 +65,17 @@ function getAllInfo(movieTitle) {
 function hideInfoShowSearch() {
 	$('#infoPage').hide(1000);
 	$('#frontPage').show(1000);
+	
+	player.destroy();
 }
 
 // för HttpREQ
-var httpURL = 'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&order=relevance&q=Baby+Driver+official+trailer+-honest+-review&type=video&videoDefinition=any&videoDuration=short&videoEmbeddable=true&key=AIzaSyAV3CqSGsBZ-SiW90bzYfLrCf-lQgq9JZs';
+var httpURL;
 var videoId;
 
-function httpGet(theUrl) {
-	var xmlHttp = new XMLHttpRequest();
-	xmlHttp.open("GET", theUrl, false); // false for synchronous request
-	xmlHttp.send(null);
-	return xmlHttp.responseText;
+function setHttpURL(title){
+	var editTitle = title.split(' ').join('+');
+	httpURL = 'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&order=relevance&q='+ editTitle +'+official+trailer+-honest+-review&type=video&videoDefinition=any&videoDuration=short&videoEmbeddable=true&key=AIzaSyAV3CqSGsBZ-SiW90bzYfLrCf-lQgq9JZs';
 }
 
 function getXML() {
@@ -82,7 +83,6 @@ function getXML() {
 		videoId = data['items'][0]['id']['videoId'];
 		startYT();
 	});
-
 }
 
 // FÖR IFRAME
