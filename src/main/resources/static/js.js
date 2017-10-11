@@ -31,8 +31,9 @@ function getMoviePoster(movieTitle) {
 
 function getAllInfo() {
 	$.ajax({
-//		url : 'http://omdbapi.com/?t=' + movieTitle + '&apikey=bbba3eae',
-		url: 'http://omdbapi.com/?t=Batman&apikey=bbba3eae',
+		url : 'http://omdbapi.com/?t=' + movieTitle + '&apikey=bbba3eae',
+//		url: 'http://omdbapi.com/?t=Batman&apikey=bbba3eae',
+		
 		headers : {
 			"Accept" : "application/json"
 		}
