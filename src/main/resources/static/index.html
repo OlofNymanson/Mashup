@@ -15,22 +15,7 @@ body {
 }
 
 #movieTable {
-	border-collapse: collapse;
-	border-style: solid;
-	border-color: black;
-	border-width: 1px;
-	position: relative;
-	left: 37%;
-}
-
-#movieTable th, #movieTable td {
-	border-bottom: solid 1px black;
-	padding: 5px;
-	max-width: 250px;
-}
-
-#movieTable td {
-	width: 200px;
+	margin: auto;
 }
 
 img {
@@ -44,19 +29,31 @@ img {
 
 #moviePoster {
 	text-align: left;
+	position: relative;
+	top: 300px;
 }
 
 h5 {
 	text-align: left;
+}
+
+#infoPage{
+	position: relative;
+	bottom: 300px;
+}
+
+#textbox1{
+	text-align: center;
+	width: 275px;
 }
 </style>
 </head>
 <body>
 	<section id="frontPage">
 		<h1>Filmälskaren</h1>
-		<p>
-			Välkommen till Filmälskaren!<br> Ange en film nedan för att få
-			handling och trailer!
+		<p id="info">
+			Välkommen till Filmälskaren!<br> 
+			Ange en film nedan för att få handling och trailer!
 		</p>
 
 		<input type="text/input" id="textbox1"></input>
