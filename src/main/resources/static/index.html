@@ -46,9 +46,22 @@ img {
 	text-align: left;
 }
 
-h5 {
+h4, #moviePlot {
 	text-align: left;
+	position: relative;
+	bottom: 305px;
 }
+
+#player{
+	position: relative;
+	bottom: 305px;
+}
+
+#btnBack{
+	position: relative;
+	bottom: 305px;
+}
+
 </style>
 </head>
 <body>
@@ -72,15 +85,15 @@ h5 {
 
 		<div id="player"></div>
 		
-		<h5 id="movieTitle"></h5>
-		<h5 id="movieGenre"></h5>
-		<h5 id="movieYear"></h5>
-		<h5 id="movieLength"></h5>
-		<h5 id="movieRating"></h5>
-		<h5>Handling:</h5>
+		<h4 id="movieTitle"></h4>
+		<h4 id="movieGenre"></h4>
+		<h4 id="movieYear"></h4>
+		<h4 id="movieLength"></h4>
+		<h4 id="movieRating"></h4>
+		<h4>Handling:</h4>
 		<p id="moviePlot"></p>
 
-		<button id="backToSearch" onclick="hideInfoShowSearch()">Tillbaka</button>
+		<button id="btnBack" onclick="hideInfoShowSearch()">Tillbaka</button>
 	</section>
 </body>
 </html>

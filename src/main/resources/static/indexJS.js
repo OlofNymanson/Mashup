@@ -65,7 +65,7 @@ function getAllInfo(movieTitle) {
 function hideInfoShowSearch() {
 	$('#infoPage').hide(1000);
 	$('#frontPage').show(1000);
-	
+
 	player.destroy();
 }
 
@@ -73,9 +73,11 @@ function hideInfoShowSearch() {
 var httpURL;
 var videoId;
 
-function setHttpURL(title){
+function setHttpURL(title) {
 	var editTitle = title.split(' ').join('+');
-	httpURL = 'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&order=relevance&q='+ editTitle +'+official+trailer+-honest+-review&type=video&videoDefinition=any&videoDuration=short&videoEmbeddable=true&key=AIzaSyAV3CqSGsBZ-SiW90bzYfLrCf-lQgq9JZs';
+	httpURL = 'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&order=relevance&q='
+			+ editTitle
+			+ '+official+trailer+-honest+-review&type=video&videoDefinition=any&videoDuration=short&videoEmbeddable=true&key=AIzaSyAV3CqSGsBZ-SiW90bzYfLrCf-lQgq9JZs';
 }
 
 function getXML() {
@@ -92,8 +94,7 @@ var firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 var player;
 
-
-function startYT(){
+function startYT() {
 	player = new YT.Player('player', {
 		height : '600',
 		width : '800',
