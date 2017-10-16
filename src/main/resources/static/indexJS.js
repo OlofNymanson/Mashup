@@ -22,11 +22,16 @@ function getMoviePoster(movieTitle) {
 			function(data) {
 				poster = data['Poster'];
 				title = data['Title'];
-				row = '<tr><th><img src="' + poster
-						+ '" onclick="getAllInfo(\'' + title
-						+ '\')"/></th><td>' + title + '</td></tr>';
+				
+				if(title == null){
+					table = '<tr><td><img src=""></td></tr>'+
+							'<tr><td>Ingen film hittad</td></tr>';
+				}else{
+					table = '<tr><td><img src="' + poster + '" onclick="getAllInfo(\'' + title + '\')"></td></tr>' + 
+					'<tr><td>' + title + '</td></tr>';
+				}
 
-				$('#movieTable').html(row);
+				$('#movieTable').html(table);
 			});
 }
 
@@ -55,7 +60,7 @@ function getAllInfo(movieTitle) {
 		$('#movieRating').html('IMDB-betyg: ' + rating);
 		$('#moviePlot').html(plot);
 
-		setHttpURL(title);
+		setHttpURL(title, year);
 		getXML();
 
 		$('#infoPage').show(1000);
@@ -73,10 +78,11 @@ function hideInfoShowSearch() {
 var httpURL;
 var videoId;
 
-function setHttpURL(title) {
+function setHttpURL(title, year) {
 	var editTitle = title.split(' ').join('+');
 	httpURL = 'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&order=relevance&q='
 			+ editTitle
+			+ year
 			+ '+official+trailer+-honest+-review&type=video&videoDefinition=any&videoDuration=short&videoEmbeddable=true&key=AIzaSyAV3CqSGsBZ-SiW90bzYfLrCf-lQgq9JZs';
 }
 
