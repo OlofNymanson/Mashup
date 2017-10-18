@@ -2,83 +2,30 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
 <title>Filmälskaren</title>
 <script src="indexJS.js"></script>
+<link rel="stylesheet" type="text/css" href="css.css">
 
-<style type="text/css">
-
-body {
-	text-align: center;
-	
-	background-color: #3C3B3B;
-	color: orange;
-}
-
-#info{
-	width: 500px;
-	margin: auto;
-	border-bottom: solid 2px orange;
-	padding: 5px;
-}
-
-#movieTable {
-	margin: auto;
-}
-
-img {
-	height: 300px;
-	width: 200px;
-}
-
-#movieTable th, #movieTable td {
-	max-width: 250px;
-}
-
-#moviePoster {
-	text-align: left;
-	position: relative;
-	top: 300px;
-}
-
-h4, h3, #moviePlot {
-	text-align: left;
-}
-
-#infoPage{
-	position: relative;
-	bottom: 300px;
-}
-
-#textbox1{
-	text-align: center;
-	width: 275px;
-}
-
-#textbox1, #btn1{
-	position: relative;
-	top: 20px;
-}
-
-#tableHeader, #movieTable{
-	position: relative;
-	top: 20px;
-}
-</style>
 </head>
 <body>
 	<section id="frontPage">
-		<h1>Filmälskaren</h1>
+		<h1>FILMÄLSKAREN</h1>
 		<p id="info">
 			Välkommen till Filmälskaren!<br> 
-			Ange en film nedan för att få handling och trailer!
+			Ange en film nedan, med eller utan år, för att få handling och trailer!
 		</p>
-
-		<input type="text/input" id="textbox1"></input>
+		
+		<input id="nameBox" onfocus="if (this.value=='Name') this.value = ''" type="text" value="Name"></input>		
+		<input id="yearBox" onfocus="if (this.value=='Year') this.value = ''" type="text" value="Year"></input>
+		
+		
 		<button type="button" id="btn1"
-			onclick="getMovieTitle(document.getElementById('textbox1').value)">SÖK</button>
+			onclick="getMovieTitle(document.getElementById('nameBox').value, document.getElementById('yearBox').value);">SÖK</button>
+			
 		<h2 id="tableHeader"></h2>
 		<table id="movieTable">
 		</table>
@@ -88,16 +35,20 @@ h4, h3, #moviePlot {
 		<section id="moviePoster"></section>
 
 		<div id="player"></div>
-		
-		<h3 id="movieTitle"></h3>
-		<h4 id="movieGenre"></h4>
-		<h4 id="movieYear"></h4>
-		<h4 id="movieLength"></h4>
-		<h4 id="movieRating"></h4>
-		<h4>Handling:</h4>
+
+		<section id="headers">
+			<h3 id="movieTitle"></h3>
+			<h4 id="movieDirector"></h4>
+			<h4 id="movieActors"></h4>
+			<h4 id="movieGenre"></h4>
+			<h4 id="movieYear"></h4>
+			<h4 id="movieLength"></h4>
+			<h4 id="movieRating"></h4>
+		</section>
 		<p id="moviePlot"></p>
 
-		<button id="backToSearch" onclick="hideInfoShowSearch()">Tillbaka</button>
+		<table id="relatedMoviesTable"></table>
+		<button id="btnBack" onclick="hideInfoShowSearch()">Tillbaka</button>
 	</section>
 </body>
 </html>
