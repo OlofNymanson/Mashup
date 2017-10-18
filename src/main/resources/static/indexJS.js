@@ -1,25 +1,59 @@
-var theMovieTitle;
 
-function getMovieTitle(movieTitle) {
-	$.ajax({
-		url : 'http://omdbapi.com/?t=' + movieTitle + '&apikey=bbba3eae',
-		headers : {
-			"Accept" : "application/json"
-		}
-	}).done(function(data) {
-		movieTitle = data['Title'];
-		
-		theMovieTitle = movieTitle;
-		
-		$('#tableHeader').html('Sökresultat för: ' + movieTitle);
-	});
+function getMovieTitle(movieTitle, movieYear) {
+	if (movieYear == "" || movieYear == "Year") {
 
-	getMoviePoster(movieTitle);
+		$.ajax(
+				{
+					url : 'http://omdbapi.com/?t=' + movieTitle
+							+ '&plot=full&apikey=bbba3eae',
+					headers : {
+						"Accept" : "application/json"
+					}
+				}).done(function(data) {
+			movieTitle = data['Title'];
+			$('#tableHeader').html('Sökresultat för: ' + movieTitle);
+		});
+
+		getMoviePoster(movieTitle);
+
+	} else {
+		console.log("inne i ELSEsatsen");
+		console.log(movieYear);
+
+		$.ajax(
+				{
+					url : 'http://omdbapi.com/?t=' + movieTitle + '&y='
+							+ movieYear + '&plot=full&apikey=bbba3eae',
+					headers : {
+						"Accept" : "application/json"
+					}
+				}).done(
+				function(data) {
+					movieTitle = data['Title'];
+					$('#tableHeader').html(
+							'Sökresultat för: ' + movieTitle + ' Från år: '
+									+ movieYear);
+				});
+
+		getMoviePoster(movieTitle, movieYear);
+
+	}
+
 }
 
-function getMoviePoster(movieTitle) {
+function getMoviePoster(movieTitle, movieYear) {
+
+	var url;
+	if (movieYear == "" || movieYear == "Year") {
+		url = 'http://omdbapi.com/?t=' + movieTitle
+				+ '&plot=full&apikey=bbba3eae';
+	} else {
+		url = 'http://omdbapi.com/?t=' + movieTitle + '&y=' + movieYear
+				+ '&plot=full&apikey=bbba3eae';
+	}
+
 	$.ajax({
-		url : 'http://omdbapi.com/?t=' + movieTitle + '&apikey=bbba3eae',
+		url : url,
 		headers : {
 			"Accept" : "application/json"
 		}
@@ -27,17 +61,20 @@ function getMoviePoster(movieTitle) {
 			function(data) {
 				poster = data['Poster'];
 				title = data['Title'];
-				
-				if(title == null){
-					table = '<tr><td><img src=""></td></tr>'+
-							'<tr><td>Ingen film hittad</td></tr>';
-				}else{
-					table = '<tr><td><img src="' + poster + '" onclick="getAllInfo(\'' + title + '\')"></td></tr>' + 
-					'<tr><td>' + title + '</td></tr>';
-					
+
+
+				if (title == null) {
+					table = '<tr><td><img src=""></td></tr>'
+							+ '<tr><td>Ingen film hittad</td></tr>';
+				} else {
+					table = '<tr><td><img src="' + poster
+							+ '" onclick="getAllInfo(\'' + title
+							+ '\')"></td></tr>' + '<tr><td>' + title
+							+ '</td></tr>';
+
+					$('#movieTable:hover').css('cursor', 'pointer');
 				}
-//				$('#movieTable:hover').css('cursor','pointer');
-				
+
 				$('#movieTable').html(table);
 			});
 }
@@ -45,8 +82,17 @@ function getMoviePoster(movieTitle) {
 function getAllInfo(movieTitle) {
 	$('#frontPage').hide(1000);
 
+	var url;
+	if (movieYear == "" || movieYear == "year") {
+		url = 'http://omdbapi.com/?t=' + movieTitle
+				+ '&plot=full&apikey=bbba3eae';
+	} else {
+		url = 'http://omdbapi.com/?t=' + movieTitle + '&y=' + movieYear
+				+ '&plot=full&apikey=bbba3eae';
+	}
+
 	$.ajax({
-		url : 'http://omdbapi.com/?t=' + movieTitle + '&apikey=bbba3eae',
+		url : url,
 		headers : {
 			"Accept" : "application/json"
 		}
@@ -95,7 +141,8 @@ function setHttpURL(title, year) {
 	var editTitle = title.split(' ').join('+');
 	httpURL = 'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&order=relevance&q='
 			+ editTitle
-			+ '+' + year
+			+ '+'
+			+ year
 			+ '+official+trailer+-honest+-review&type=video&videoDefinition=any&videoDuration=short&videoEmbeddable=true&key=AIzaSyAV3CqSGsBZ-SiW90bzYfLrCf-lQgq9JZs';
 }
 
@@ -132,7 +179,7 @@ function getRelatedMovies(actors){
 	var actor = actors.split(", ");
 	var url = 'http://api.tmdb.org/3/search/person?api_key=1ca35d6808f235b4bee12b69f15687ed&query='
 	
-//	console.log(actor);
+// console.log(actor);
 
 	var movieArray = [];
 	
