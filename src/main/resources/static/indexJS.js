@@ -29,6 +29,8 @@ function getMoviePoster(movieTitle) {
 				}else{
 					table = '<tr><td><img src="' + poster + '" onclick="getAllInfo(\'' + title + '\')"></td></tr>' + 
 					'<tr><td>' + title + '</td></tr>';
+					
+					$('#movieTable:hover').css('cursor','pointer');
 				}
 				
 				$('#movieTable').html(table);
@@ -51,9 +53,13 @@ function getAllInfo(movieTitle) {
 		rating = data['imdbRating'];
 		plot = data['Plot'];
 		poster = data['Poster'];
+		actors = data['Actors'];
+		director = data['Director'];
 
 		$('#moviePoster').html('<img src="' + poster + '">');
 		$('#movieTitle').html('Titel: ' + title);
+		$('#movieDirector').html('Regissör: ' + director);
+		$('#movieActors').html('Skådespelare: ' + actors);
 		$('#movieGenre').html('Genre: ' + genre);
 		$('#movieYear').html('År: ' + year);
 		$('#movieLength').html('Filmlängd: ' + length);
