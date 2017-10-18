@@ -8,10 +8,20 @@
 <title>Filmälskaren</title>
 <script src="indexJS.js"></script>
 
-
 <style type="text/css">
+
 body {
 	text-align: center;
+	
+	background-color: #3C3B3B;
+	color: orange;
+}
+
+#info{
+	width: 500px;
+	margin: auto;
+	border-bottom: solid 2px orange;
+	padding: 5px;
 }
 
 #movieTable {
@@ -33,7 +43,7 @@ img {
 	top: 300px;
 }
 
-h5 {
+h4, h3, #moviePlot {
 	text-align: left;
 }
 
@@ -45,6 +55,16 @@ h5 {
 #textbox1{
 	text-align: center;
 	width: 275px;
+}
+
+#textbox1, #btn1{
+	position: relative;
+	top: 20px;
+}
+
+#tableHeader, #movieTable{
+	position: relative;
+	top: 20px;
 }
 </style>
 </head>
@@ -69,12 +89,12 @@ h5 {
 
 		<div id="player"></div>
 		
-		<h5 id="movieTitle"></h5>
-		<h5 id="movieGenre"></h5>
-		<h5 id="movieYear"></h5>
-		<h5 id="movieLength"></h5>
-		<h5 id="movieRating"></h5>
-		<h5>Handling:</h5>
+		<h3 id="movieTitle"></h3>
+		<h4 id="movieGenre"></h4>
+		<h4 id="movieYear"></h4>
+		<h4 id="movieLength"></h4>
+		<h4 id="movieRating"></h4>
+		<h4>Handling:</h4>
 		<p id="moviePlot"></p>
 
 		<button id="backToSearch" onclick="hideInfoShowSearch()">Tillbaka</button>

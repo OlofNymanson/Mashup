@@ -53,7 +53,8 @@ function getAllInfo(movieTitle) {
 		poster = data['Poster'];
 
 		$('#moviePoster').html('<img src="' + poster + '">');
-		$('#movieTitle').html('Titel: ' + title);
+//		$('#movieTitle').html('Titel: ' + title);
+		$('#movieTitle').html(title);
 		$('#movieGenre').html('Genre: ' + genre);
 		$('#movieYear').html('År: ' + year);
 		$('#movieLength').html('Filmlängd: ' + length);
@@ -64,6 +65,7 @@ function getAllInfo(movieTitle) {
 		getXML();
 
 		$('#infoPage').show(1000);
+		$('#movieTitle').css('text-decoration','underline');
 	});
 }
 
@@ -81,7 +83,7 @@ var videoId;
 function setHttpURL(title, year) {
 	var editTitle = title.split(' ').join('+');
 	httpURL = 'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&order=relevance&q='
-			+ editTitle
+			+ editTitle + '+'
 			+ year
 			+ '+official+trailer+-honest+-review&type=video&videoDefinition=any&videoDuration=short&videoEmbeddable=true&key=AIzaSyAV3CqSGsBZ-SiW90bzYfLrCf-lQgq9JZs';
 }
