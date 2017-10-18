@@ -27,12 +27,14 @@ img {
 	top: 304px;
 }
 
-#headers, #moviePlot, #moviePlot {
+#headers, #moviePlot, #plotHeader, #moviePlot {
 	text-align: left;
 }
 
 #headers{
-	
+	max-width: 420px;
+	position: relative;
+	bottom: 310px;
 }
 
 #infoPage{
@@ -43,5 +45,16 @@ img {
 #textbox1{
 	text-align: center;
 	width: 275px;
+}
+
+#player{
+	width: 800px;
+	position: relative;
+	left: 220px;
+}
+
+#moviePlot, #btnBack{
+	position: relative;
+	bottom: 310px;
 }
 

@@ -17,9 +17,6 @@ function getMovieTitle(movieTitle, movieYear) {
 		getMoviePoster(movieTitle);
 
 	} else {
-		console.log("inne i ELSEsatsen");
-		console.log(movieYear);
-
 		$.ajax(
 				{
 					url : 'http://omdbapi.com/?t=' + movieTitle + '&y='
@@ -64,7 +61,7 @@ function getMoviePoster(movieTitle, movieYear) {
 
 
 				if (title == null) {
-					table = '<tr><td><img src=""></td></tr>'
+					table = '<tr><td><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Red_X.svg/2000px-Red_X.svg.png"></td></tr>'
 							+ '<tr><td>Ingen film hittad</td></tr>';
 				} else {
 					table = '<tr><td><img src="' + poster
@@ -72,7 +69,6 @@ function getMoviePoster(movieTitle, movieYear) {
 							+ '\')"></td></tr>' + '<tr><td>' + title
 							+ '</td></tr>';
 
-					$('#movieTable:hover').css('cursor', 'pointer');
 				}
 
 				$('#movieTable').html(table);
@@ -80,6 +76,7 @@ function getMoviePoster(movieTitle, movieYear) {
 }
 
 function getAllInfo(movieTitle) {
+	console.log(movieTitle);
 	$('#frontPage').hide(1000);
 
 	var url;
@@ -140,10 +137,10 @@ var videoId;
 function setHttpURL(title, year) {
 	var editTitle = title.split(' ').join('+');
 	httpURL = 'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&order=relevance&q='
-			+ editTitle
-			+ '+'
-			+ year
-			+ '+official+trailer+-honest+-review&type=video&videoDefinition=any&videoDuration=short&videoEmbeddable=true&key=AIzaSyAV3CqSGsBZ-SiW90bzYfLrCf-lQgq9JZs';
+		+ editTitle
+		+ '+'
+		+ year
+		+ '+official+movie+trailer+-honest+-review+-unofficial+-teaser&type=video&videoDefinition=standard&videoDuration=short&videoEmbeddable=true&key=AIzaSyAV3CqSGsBZ-SiW90bzYfLrCf-lQgq9JZs';
 }
 
 function getXML() {
