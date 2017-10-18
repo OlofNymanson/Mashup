@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat+Alternates');
+
+body {
+	text-align: center;
+	
+	background-color: #303133;
+	color: #03aeb7;
+	font-family: Montserrat Alternates;
+}
+
+#movieTable {
+	margin: auto;
+}
+
+img {
+	height: 300px;
+	width: 200px;
+}
+
+#movieTable th, #movieTable td {
+	max-width: 250px;
+}
+
+#moviePoster {
+	text-align: left;
+	position: relative;
+	top: 304px;
+}
+
+#headers, #moviePlot, #moviePlot {
+	text-align: left;
+}
+
+#headers{
+	
+}
+
+#infoPage{
+	position: relative;
+	bottom: 250px;
+}
+
+#textbox1{
+	text-align: center;
+	width: 275px;
+}
+

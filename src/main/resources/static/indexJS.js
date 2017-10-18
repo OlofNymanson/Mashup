@@ -1,3 +1,5 @@
+var theMovieTitle;
+
 function getMovieTitle(movieTitle) {
 	$.ajax({
 		url : 'http://omdbapi.com/?t=' + movieTitle + '&apikey=bbba3eae',
@@ -6,6 +8,9 @@ function getMovieTitle(movieTitle) {
 		}
 	}).done(function(data) {
 		movieTitle = data['Title'];
+		
+		theMovieTitle = movieTitle;
+		
 		$('#tableHeader').html('Sökresultat för: ' + movieTitle);
 	});
 
@@ -30,8 +35,8 @@ function getMoviePoster(movieTitle) {
 					table = '<tr><td><img src="' + poster + '" onclick="getAllInfo(\'' + title + '\')"></td></tr>' + 
 					'<tr><td>' + title + '</td></tr>';
 					
-					$('#movieTable:hover').css('cursor','pointer');
 				}
+//				$('#movieTable:hover').css('cursor','pointer');
 				
 				$('#movieTable').html(table);
 			});
@@ -57,7 +62,7 @@ function getAllInfo(movieTitle) {
 		director = data['Director'];
 
 		$('#moviePoster').html('<img src="' + poster + '">');
-		$('#movieTitle').html('Titel: ' + title);
+		$('#movieTitle').html(title);
 		$('#movieDirector').html('Regissör: ' + director);
 		$('#movieActors').html('Skådespelare: ' + actors);
 		$('#movieGenre').html('Genre: ' + genre);
@@ -68,7 +73,9 @@ function getAllInfo(movieTitle) {
 
 		setHttpURL(title, year);
 		getXML();
+		getRelatedMovies(actors);
 
+		$('#movieTitle').css('text-decoration','underline');
 		$('#infoPage').show(1000);
 	});
 }
@@ -119,4 +126,38 @@ function startYT() {
 
 function onPlayerReady(event) {
 	event.target.playVideo();
+}
+
+function getRelatedMovies(actors){
+	var actor = actors.split(", ");
+	var url = 'http://api.tmdb.org/3/search/person?api_key=1ca35d6808f235b4bee12b69f15687ed&query='
+	
+//	console.log(actor);
+
+	var movieArray = [];
+	
+	for(i = 0; i < actor.length / 2; i++){
+		var editName = actor[i].split(' ').join('\%20');
+		var editURL = '';
+		editURL = url + editName;
+		
+		$.getJSON(editURL, function(data) {
+			
+			for(x = 0; x < 3; x++){
+				var knownFor = data['results'][0]['known_for'][x]['original_title'];
+				
+				if(theMovieTitle != knownFor && !movieArray.includes(knownFor)){	
+					movieArray.push(knownFor);
+				}
+			}
+		});
+	}
+	
+	console.log(movieArray);
+	
+	var length = movieArray.length;
+	
+	for(i = 0; i < 3; i++){
+		console.log(movieArray[i]);
+	}
 }

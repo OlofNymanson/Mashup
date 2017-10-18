@@ -2,59 +2,21 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
 <title>Filmälskaren</title>
 <script src="indexJS.js"></script>
+<link rel="stylesheet" type="text/css" href="css.css">
 
-
-<style type="text/css">
-body {
-	text-align: center;
-}
-
-#movieTable {
-	margin: auto;
-}
-
-img {
-	height: 300px;
-	width: 200px;
-}
-
-#movieTable th, #movieTable td {
-	max-width: 250px;
-}
-
-#moviePoster {
-	text-align: left;
-	position: relative;
-	top: 304px;
-}
-
-h4, #moviePlot {
-	text-align: left;
-}
-
-#infoPage{
-	position: relative;
-	bottom: 250px;
-}
-
-#textbox1{
-	text-align: center;
-	width: 275px;
-}
-
-</style>
 </head>
 <body>
 	<section id="frontPage">
-		<h1>Filmälskaren</h1>
+		<h1>FiLMÄLSKAREN</h1>
 		<p id="info">
-			Välkommen till Filmälskaren!<br> 
-			Ange en film nedan för att få handling och trailer!
+			Välkommen till Filmälskaren!<br> Ange en film nedan för att få
+			handling och trailer!
 		</p>
 
 		<input type="text/input" id="textbox1"></input>
@@ -69,17 +31,19 @@ h4, #moviePlot {
 		<section id="moviePoster"></section>
 
 		<div id="player"></div>
-	
-		<h4 id="movieTitle"></h4>
-		<h4 id="movieDirector"></h4>
-		<h4 id="movieActors"></h4>
-		<h4 id="movieGenre"></h4>
-		<h4 id="movieYear"></h4>
-		<h4 id="movieLength"></h4>
-		<h4 id="movieRating"></h4>
+		<section id="headers">
+			<h3 id="movieTitle"></h3>
+			<h4 id="movieDirector"></h4>
+			<h4 id="movieActors"></h4>
+			<h4 id="movieGenre"></h4>
+			<h4 id="movieYear"></h4>
+			<h4 id="movieLength"></h4>
+			<h4 id="movieRating"></h4>
+		</section>
 		<h4>Handling:</h4>
 		<p id="moviePlot"></p>
 
+		<table id="relatedMoviesTable"></table>
 		<button id="btnBack" onclick="hideInfoShowSearch()">Tillbaka</button>
 	</section>
 </body>
