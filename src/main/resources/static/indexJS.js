@@ -30,7 +30,7 @@ function getMoviePoster(movieTitle) {
 					table = '<tr><td><img src="' + poster + '" onclick="getAllInfo(\'' + title + '\')"></td></tr>' + 
 					'<tr><td>' + title + '</td></tr>';
 				}
-
+				
 				$('#movieTable').html(table);
 			});
 }
@@ -82,7 +82,7 @@ function setHttpURL(title, year) {
 	var editTitle = title.split(' ').join('+');
 	httpURL = 'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&order=relevance&q='
 			+ editTitle
-			+ year
+			+ '+' + year
 			+ '+official+trailer+-honest+-review&type=video&videoDefinition=any&videoDuration=short&videoEmbeddable=true&key=AIzaSyAV3CqSGsBZ-SiW90bzYfLrCf-lQgq9JZs';
 }
 
