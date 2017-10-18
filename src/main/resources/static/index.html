@@ -54,12 +54,16 @@ h4, #moviePlot {
 		<h1>Filmälskaren</h1>
 		<p id="info">
 			Välkommen till Filmälskaren!<br> 
-			Ange en film nedan för att få handling och trailer!
+			Ange en film nedan, med eller utan år, för att få handling och trailer!
 		</p>
-
-		<input type="text/input" id="textbox1"></input>
+		
+		<input id="nameBox" onfocus="if (this.value=='Name') this.value = ''" type="text" value="Name"></input>		
+		<input id="yearBox" onfocus="if (this.value=='Year') this.value = ''" type="text" value="Year"></input>
+		
+		
 		<button type="button" id="btn1"
-			onclick="getMovieTitle(document.getElementById('textbox1').value)">SÖK</button>
+			onclick="getMovieTitle(document.getElementById('nameBox').value, document.getElementById('yearBox').value);">SÖK</button>
+			
 		<h2 id="tableHeader"></h2>
 		<table id="movieTable">
 		</table>
