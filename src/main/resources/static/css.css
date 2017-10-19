@@ -14,6 +14,19 @@ body {
 	font-family: Montserrat Alternates;
 }
 
+
+h1{
+	
+color: #f78d31;
+}
+
+#tableHeader, #movieTable{
+	color: #f78d31;
+	
+	
+}
+
+
 #movieTable {
 	margin: auto;
 }
@@ -41,16 +54,28 @@ img {
 	max-width: 420px;
 	position: relative;
 	bottom: 310px;
+	 display: inline;
+	
 }
 
 #infoPage{
 	position: relative;
 	bottom: 250px;
+	
+	
+}
+
+#movieTitle, #movieDirector, #movieActors, #movieGenre, #movieYear, #movieLength, #movieRating{
+			color: #f78d31;
+			
+		
 }
 
 #textbox1{
 	text-align: center;
 	width: 275px;
+	
+	
 }
 
 #player{

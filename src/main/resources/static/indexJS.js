@@ -1,6 +1,4 @@
-
-
-function getMovieTitle(movieTitle, movieYear) {
+	function getMovieTitle(movieTitle, movieYear) {
 	if (movieYear == "" || movieYear == "Year") {
 
 		$.ajax(
@@ -107,12 +105,19 @@ function getAllInfo(movieTitle) {
 
 		$('#moviePoster').html('<img src="' + poster + '">');
 		$('#movieTitle').html(title);
-		$('#movieDirector').html('Regissör: ' + director);
-		$('#movieActors').html('Skådespelare: ' + actors);
-		$('#movieGenre').html('Genre: ' + genre);
-		$('#movieYear').html('År: ' + year);
-		$('#movieLength').html('Filmlängd: ' + length);
-		$('#movieRating').html('IMDB-betyg: ' + rating);
+		$('#movieDirector').html('Regissör: ');
+		$('#movieDirectorInfo').html(director);
+		$('#movieActors').html('Skådespelare: ');
+		$('#movieActorsInfo').html(actors);
+		$('#movieGenre').html('Genre: ');
+		$('#movieGenreInfo').html(genre);
+		$('#movieYear').html('År: ');
+		$('#movieYearInfo').html(year);
+		$('#movieLength').html('Filmlängd: ');
+		$('#movieLengthInfo').html(length);
+		$('#movieRating').html('IMDB-betyg:');
+		$('#movieRatingInfo').html(" " + rating);
+
 		$('#moviePlot').html(plot);
 
 		setHttpURL(title, year);
