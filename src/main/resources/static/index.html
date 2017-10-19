@@ -19,9 +19,11 @@
 			Ange en film nedan, med eller utan år, för att få handling och trailer!
 		</p>
 		
-		<input id="nameBox" onfocus="if (this.value=='Name') this.value = ''" type="text" value="Name"></input>		
-		<input id="yearBox" onfocus="if (this.value=='Year') this.value = ''" type="text" value="Year"></input>
-		
+		<input id="nameBox" onfocus="if (this.value=='Name') this.value = ''" type="text" value="Name" onkeydown = "if (event.keyCode == 13)
+                        document.getElementById('btn1').click()" ></input>		
+		<input id="yearBox" onfocus="if (this.value=='Year') this.value = ''" type="text" value="Year" onkeydown = "if (event.keyCode == 13)
+                        document.getElementById('btn1').click()"></input>
+	
 		
 		<button type="button" id="btn1"
 			onclick="getMovieTitle(document.getElementById('nameBox').value, document.getElementById('yearBox').value);">SÖK</button>

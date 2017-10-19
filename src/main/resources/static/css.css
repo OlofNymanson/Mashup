@@ -1,8 +1,14 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat+Alternates');
 
+
+
+head{
+ height: 100vh;
+    
+}
+
 body {
 	text-align: center;
-	
 	background-color: #303133;
 	color: #03aeb7;
 	font-family: Montserrat Alternates;
