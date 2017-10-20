@@ -1,4 +1,4 @@
-	function getMovieTitle(movieTitle, movieYear) {
+function getMovieTitle(movieTitle, movieYear) {
 	if (movieYear == "" || movieYear == "Year") {
 
 		$.ajax(
@@ -75,7 +75,6 @@ function getMoviePoster(movieTitle, movieYear) {
 }
 
 function getAllInfo(movieTitle) {
-	console.log(movieTitle);
 	$('#frontPage').hide(1000);
 
 	var url;
@@ -122,7 +121,7 @@ function getAllInfo(movieTitle) {
 
 		setHttpURL(title, year);
 		getXML();
-		getRelatedMovies(actors);
+		getRelatedMovies(actors, title);
 
 		$('#movieTitle').css('text-decoration','underline');
 		$('#infoPage').show(1000);
@@ -133,6 +132,7 @@ function hideInfoShowSearch() {
 	$('#infoPage').hide(1000);
 	$('#frontPage').show(1000);
 
+	$('#relatedMoviesTable').html('');
 	player.destroy();
 }
 
@@ -146,7 +146,7 @@ function setHttpURL(title, year) {
 		+ editTitle
 		+ '+'
 		+ year
-		+ '+official+movie+trailer+-honest+-review+-unofficial+-teaser+-español+-russian&type=video&videoDefinition=standard&videoDuration=short&videoEmbeddable=true&key=AIzaSyAV3CqSGsBZ-SiW90bzYfLrCf-lQgq9JZs';
+		+ '+official+movie+trailer+-honest+-review+-unofficial+-teaser+-español+-russian+-italiano+-German+-Deutch&type=video&videoDefinition=standard&videoDuration=short&videoEmbeddable=true&key=AIzaSyAV3CqSGsBZ-SiW90bzYfLrCf-lQgq9JZs';
 }
 
 function getXML() {
@@ -178,11 +178,9 @@ function onPlayerReady(event) {
 	event.target.playVideo();
 }
 
-function getRelatedMovies(actors){
+function getRelatedMovies(actors, movieTitle){
 	var actor = actors.split(", ");
 	var url = 'http://api.tmdb.org/3/search/person?api_key=1ca35d6808f235b4bee12b69f15687ed&query='
-	
-// console.log(actor);
 
 	var movieArray = [];
 	
@@ -191,23 +189,39 @@ function getRelatedMovies(actors){
 		var editURL = '';
 		editURL = url + editName;
 		
+		console.log(actor[i]);
+		
 		$.getJSON(editURL, function(data) {
 			
 			for(x = 0; x < 3; x++){
 				var knownFor = data['results'][0]['known_for'][x]['original_title'];
 				
-				if(theMovieTitle != knownFor && !movieArray.includes(knownFor)){	
+				if(movieTitle != knownFor && !movieArray.includes(knownFor)){	
 					movieArray.push(knownFor);
+					addRelatedMovie(knownFor);
 				}
 			}
 		});
 	}
-	
-	console.log(movieArray);
-	
-	var length = movieArray.length;
-	
-	for(i = 0; i < 3; i++){
-		console.log(movieArray[i]);
-	}
+}
+
+function addRelatedMovie(title){
+	$.ajax({
+		url : 'http://omdbapi.com/?t=' + title
+		+ '&apikey=bbba3eae',
+		headers : {
+			"Accept" : "application/json"
+		}
+	}).done(function(data) {
+		poster = data['Poster'];
+		newTitle = data['Title'];
+		relatedMovie = '<td><img src="' + poster + '" onclick="resetInfoPage();getAllInfo(\'' + newTitle + '\')"></td>';
+		$('#relatedMoviesTable').append(relatedMovie);
+	});
+}
+
+function resetInfoPage(){
+	$('#infoPage').hide(0);
+	player.destroy();
+	$('#relatedMoviesTable').html('');
 }
