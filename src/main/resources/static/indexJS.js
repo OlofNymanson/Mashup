@@ -146,7 +146,7 @@ function setHttpURL(title, year) {
 		+ editTitle
 		+ '+'
 		+ year
-		+ '+official+movie+trailer+-honest+-review+-unofficial+-teaser&type=video&videoDefinition=standard&videoDuration=short&videoEmbeddable=true&key=AIzaSyAV3CqSGsBZ-SiW90bzYfLrCf-lQgq9JZs';
+		+ '+official+movie+trailer+-honest+-review+-unofficial+-teaser+-español+-russian&type=video&videoDefinition=standard&videoDuration=short&videoEmbeddable=true&key=AIzaSyAV3CqSGsBZ-SiW90bzYfLrCf-lQgq9JZs';
 }
 
 function getXML() {

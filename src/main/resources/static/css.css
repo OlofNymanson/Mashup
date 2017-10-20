@@ -16,6 +16,14 @@ h1 {
 	color: #f78d31;
 }
 
+#nameBox{
+	width: 275px;
+}
+
+#yearBox{
+	width: 75px;
+}
+
 #tableHeader, #movieTable {
 	color: #f78d31;
 }
@@ -105,11 +113,6 @@ img {
 #movieTitle, #movieDirector, #movieActors, #movieGenre, #movieYear,
 	#movieLength, #movieRating {
 	color: #f78d31;
-}
-
-#textbox1 {
-	text-align: center;
-	width: 275px;
 }
 
 #player {
