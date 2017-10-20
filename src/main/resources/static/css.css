@@ -1,10 +1,8 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat+Alternates');
+@import
+	url('https://fonts.googleapis.com/css?family=Montserrat+Alternates');
 
-
-
-head{
- height: 100vh;
-    
+head {
+	height: 100vh;
 }
 
 body {
@@ -14,18 +12,13 @@ body {
 	font-family: Montserrat Alternates;
 }
 
-
-h1{
-	
-color: #f78d31;
-}
-
-#tableHeader, #movieTable{
+h1 {
 	color: #f78d31;
-	
-	
 }
 
+#tableHeader, #movieTable {
+	color: #f78d31;
+}
 
 #movieTable {
 	margin: auto;
@@ -50,42 +43,82 @@ img {
 	text-align: left;
 }
 
-#headers{
+#headers {
 	max-width: 420px;
 	position: relative;
 	bottom: 310px;
-	 display: inline;
-	
 }
 
-#infoPage{
+#directorsInfo{
+	padding: 10px 0px;
+}
+
+#directorInfo h4{
+	display: inline;
+}
+
+#actorsInfo{
+	padding: 10px 0px;
+}
+
+#actorsInfo h4{
+	display: inline;
+}
+
+#genreInfo{
+	padding: 10px 0px;	
+}
+
+#genreInfo h4{
+	display: inline;
+}
+
+#yearInfo{
+	padding: 10px 0px;
+}
+
+#yearInfo h4{
+	display: inline;
+}
+
+#lengthInfo{
+	padding: 10px 0px;
+}
+
+#lengthInfo h4{
+	display: inline;
+}
+
+#ratingInfo{
+	padding: 10px 0px;
+}
+
+#ratingInfo h4{
+	display: inline;
+}
+
+#infoPage {
 	position: relative;
 	bottom: 250px;
-	
-	
 }
 
-#movieTitle, #movieDirector, #movieActors, #movieGenre, #movieYear, #movieLength, #movieRating{
-			color: #f78d31;
-			
-		
+#movieTitle, #movieDirector, #movieActors, #movieGenre, #movieYear,
+	#movieLength, #movieRating {
+	color: #f78d31;
 }
 
-#textbox1{
+#textbox1 {
 	text-align: center;
 	width: 275px;
-	
-	
 }
 
-#player{
+#player {
 	width: 800px;
 	position: relative;
 	left: 220px;
 }
 
-#moviePlot, #btnBack{
+#moviePlot, #btnBack {
 	position: relative;
-	bottom: 310px;
+	bottom: 300px;
 }
-
