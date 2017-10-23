@@ -129,7 +129,7 @@ function getAllInfo(movieTitle) {
 }
 
 function hideInfoShowSearch() {
-	$('#infoPage').hide(1000);
+	$('#infoPage').hide(0);
 	$('#frontPage').show(1000);
 
 	$('#relatedMoviesTable').html('');
@@ -146,7 +146,8 @@ function setHttpURL(title, year) {
 		+ editTitle
 		+ '+'
 		+ year
-		+ '+official+movie+trailer+-honest+-review+-unofficial+-teaser+-español+-russian+-italiano+-German+-Deutch&type=video&videoDefinition=standard&videoDuration=short&videoEmbeddable=true&key=AIzaSyAV3CqSGsBZ-SiW90bzYfLrCf-lQgq9JZs';
+		+ '+official+movie+trailer+-honest+-review+-unofficial+-teaser+-español+-russian+-italiano+-German+-Deutch+-Greek+-CZ+-PL+-clip&type=video&videoDefinition=standard&videoDuration=short&videoEmbeddable=true&key=AIzaSyAV3CqSGsBZ-SiW90bzYfLrCf-lQgq9JZs';
+
 }
 
 function getXML() {
@@ -196,7 +197,8 @@ function getRelatedMovies(actors, movieTitle){
 			for(x = 0; x < 3; x++){
 				var knownFor = data['results'][0]['known_for'][x]['original_title'];
 				
-				if(movieTitle != knownFor && !movieArray.includes(knownFor)){	
+				
+				if(movieTitle != knownFor && !movieArray.includes(knownFor) && knownFor != null){	
 					movieArray.push(knownFor);
 					addRelatedMovie(knownFor);
 				}
@@ -213,15 +215,15 @@ function addRelatedMovie(title){
 			"Accept" : "application/json"
 		}
 	}).done(function(data) {
-		poster = data['Poster'];
-		newTitle = data['Title'];
-		relatedMovie = '<td><img src="' + poster + '" onclick="resetInfoPage();getAllInfo(\'' + newTitle + '\')"></td>';
-		$('#relatedMoviesTable').append(relatedMovie);
+			poster = data['Poster'];
+			newTitle = data['Title'];
+			relatedMovie = '<td><img src="' + poster + '" onclick="resetInfoPage();getAllInfo(\'' + newTitle + '\')"></td>';
+			$('#relatedMoviesTable').append(relatedMovie);	
 	});
 }
 
 function resetInfoPage(){
 	$('#infoPage').hide(0);
 	player.destroy();
-	$('#relatedMoviesTable').html('');
+	$('#relatedMoviesTable').html('<tr><th>Liknande filmer:</th></tr>');
 }
