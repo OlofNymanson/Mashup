@@ -1,3 +1,4 @@
+var theMovieTitle;
 
 function getMovieTitle(movieTitle, movieYear) {
 	if (movieYear == "" || movieYear == "Year") {
@@ -11,6 +12,7 @@ function getMovieTitle(movieTitle, movieYear) {
 					}
 				}).done(function(data) {
 			movieTitle = data['Title'];
+			theMovieTitle = movieTitle;
 			$('#tableHeader').html('Sökresultat för: ' + movieTitle);
 		});
 
@@ -49,34 +51,34 @@ function getMoviePoster(movieTitle, movieYear) {
 				+ '&plot=full&apikey=bbba3eae';
 	}
 
-	$.ajax({
-		url : url,
-		headers : {
-			"Accept" : "application/json"
-		}
-	}).done(
-			function(data) {
-				poster = data['Poster'];
-				title = data['Title'];
-
-
-				if (title == null) {
-					table = '<tr><td><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Red_X.svg/2000px-Red_X.svg.png"></td></tr>'
-							+ '<tr><td>Ingen film hittad</td></tr>';
-				} else {
-					table = '<tr><td><img src="' + poster
-							+ '" onclick="getAllInfo(\'' + title
-							+ '\')"></td></tr>' + '<tr><td>' + title
-							+ '</td></tr>';
-
+	$
+			.ajax({
+				url : url,
+				headers : {
+					"Accept" : "application/json"
 				}
+			})
+			.done(
+					function(data) {
+						poster = data['Poster'];
+						title = data['Title'];
 
-				$('#movieTable').html(table);
-			});
+						if (title == null) {
+							table = '<tr><td><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Red_X.svg/2000px-Red_X.svg.png"></td></tr>'
+									+ '<tr><td>Ingen film hittad</td></tr>';
+						} else {
+							table = '<tr><td><img src="' + poster
+									+ '" onclick="getAllInfo(\'' + title
+									+ '\')"></td></tr>' + '<tr><td>' + title
+									+ '</td></tr>';
+
+						}
+
+						$('#movieTable').html(table);
+					});
 }
 
 function getAllInfo(movieTitle) {
-	console.log(movieTitle);
 	$('#frontPage').hide(1000);
 
 	var url;
@@ -114,46 +116,13 @@ function getAllInfo(movieTitle) {
 		$('#movieRating').html('IMDB-betyg: ' + rating);
 		$('#moviePlot').html(plot);
 
+		getRelatedMovies(actors);
 		setHttpURL(title, year);
 		getXML();
-		getRelatedMovies(actors);
 
-		$('#movieTitle').css('text-decoration','underline');
+		$('#movieTitle').css('text-decoration', 'underline');
 		$('#infoPage').show(1000);
 	});
-}
-
-function getRelatedMovies(actors){
-	var actor = actors.split(", ");
-	var url = 'http://api.tmdb.org/3/search/person?api_key=1ca35d6808f235b4bee12b69f15687ed&query='
-	
-
-	var movieArray = [];
-	
-	for(i = 0; i < actor.length / 2; i++){
-		var editName = actor[i].split(' ').join('\%20');
-		var editURL = '';
-		editURL = url + editName;
-		
-		$.getJSON(editURL, function(data) {
-			
-			for(x = 0; x < 3; x++){
-				var knownFor = data['results'][0]['known_for'][x]['original_title'];
-				
-				if(theMovieTitle != knownFor && !movieArray.includes(knownFor)){	
-					movieArray.push(knownFor);
-				}
-			}
-		});
-	}
-	
-	console.log(movieArray);
-	
-	var length = movieArray.length;
-	
-	for(i = 0; i < 3; i++){
-		console.log(movieArray[i]);
-	}
 }
 
 function hideInfoShowSearch() {
@@ -170,10 +139,12 @@ var videoId;
 function setHttpURL(title, year) {
 	var editTitle = title.split(' ').join('+');
 	httpURL = 'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&order=relevance&q='
-		+ editTitle
-		+ '+'
-		+ year
-		+ '+official+movie+trailer+-honest+-review+-unofficial+-teaser&type=video&videoDefinition=standard&videoDuration=short&videoEmbeddable=true&key=AIzaSyAV3CqSGsBZ-SiW90bzYfLrCf-lQgq9JZs';
+			+ editTitle
+			+ '+'
+			+ year
+			// +
+			// '+official+movie+trailer+-honest+-review+-unofficial+-teaser&type=video&videoDefinition=standard&videoDuration=short&videoEmbeddable=true&key=AIzaSyAV3CqSGsBZ-SiW90bzYfLrCf-lQgq9JZs';
+			+ '+official+movie+trailer+-honest+-review+-unofficial+-teaser&type=video&videoDefinition=any&videoDuration=short&videoEmbeddable=true&key=AIzaSyAV3CqSGsBZ-SiW90bzYfLrCf-lQgq9JZs';
 }
 
 function getXML() {
@@ -203,4 +174,38 @@ function startYT() {
 
 function onPlayerReady(event) {
 	event.target.playVideo();
+}
+
+function getRelatedMovies(actors) {
+	var actor = actors.split(", ");
+	var url = 'http://api.tmdb.org/3/search/person?api_key=1ca35d6808f235b4bee12b69f15687ed&query='
+
+	var movieArray = [];
+
+	for (i = 0; i < actor.length / 2; i++) {
+		console.log(actor[i]);
+
+		var editName = actor[i].split(' ').join('\%20');
+		var editURL = '';
+		editURL = url + editName;
+
+		$
+				.getJSON(
+						editURL,
+						function(data) {
+							for (x = 0; x < 3; x++) {
+								var knownFor = data['results'][0]['known_for'][x]['original_title'];
+
+								if (theMovieTitle != knownFor
+										&& !movieArray.includes(knownFor)) {
+									movieArray.push(knownFor);
+								}
+							}
+						});
+	}
+	getRelatedPosters(movieArray);
+}
+
+function getRelatedPosters(movies) {
+	console.log(movies);
 }

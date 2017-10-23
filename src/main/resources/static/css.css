@@ -2,10 +2,19 @@
 
 body {
 	text-align: center;
-	
 	background-color: #303133;
 	color: #03aeb7;
 	font-family: Montserrat Alternates;
+}
+
+#nameBox{
+	text-align: center;
+	width: 250px;
+}
+
+#yearBox{
+	width: 100px;
+	text-align: center;
 }
 
 #movieTable {
@@ -40,11 +49,6 @@ img {
 #infoPage{
 	position: relative;
 	bottom: 250px;
-}
-
-#textbox1{
-	text-align: center;
-	width: 275px;
 }
 
 #player{
