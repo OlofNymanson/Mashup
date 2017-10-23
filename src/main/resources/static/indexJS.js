@@ -108,17 +108,27 @@ function getAllInfo(movieTitle) {
 
 		$('#moviePoster').html('<img src="' + poster + '">');
 		$('#movieTitle').html(title);
-		$('#movieDirector').html('Regissör: ' + director);
-		$('#movieActors').html('Skådespelare: ' + actors);
-		$('#movieGenre').html('Genre: ' + genre);
-		$('#movieYear').html('År: ' + year);
-		$('#movieLength').html('Filmlängd: ' + length);
-		$('#movieRating').html('IMDB-betyg: ' + rating);
+		$('#movieDirector').html('Regissör: ');
+		$('#movieDirectorInfo').html(director);
+		$('#movieActors').html('Skådespelare: ');
+		$('#movieActorsInfo').html(actors);
+		$('#movieGenre').html('Genre: ');
+		$('#movieGenreInfo').html(genre);
+		$('#movieYear').html('År: ');
+		$('#movieYearInfo').html(year);
+		$('#movieLength').html('Filmlängd: ');
+		$('#movieLengthInfo').html(length);
+		$('#movieRating').html('IMDB-betyg:');
+		$('#movieRatingInfo').html(" " + rating);
+
 		$('#moviePlot').html(plot);
 
 		getRelatedMovies(actors);
 		setHttpURL(title, year);
 		getXML();
+
+		getRelatedMovies(actors, title);
+
 
 		$('#movieTitle').css('text-decoration', 'underline');
 		$('#infoPage').show(1000);
@@ -126,9 +136,10 @@ function getAllInfo(movieTitle) {
 }
 
 function hideInfoShowSearch() {
-	$('#infoPage').hide(1000);
+	$('#infoPage').hide(0);
 	$('#frontPage').show(1000);
 
+	$('#relatedMoviesTable').html('');
 	player.destroy();
 }
 
@@ -139,12 +150,10 @@ var videoId;
 function setHttpURL(title, year) {
 	var editTitle = title.split(' ').join('+');
 	httpURL = 'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&order=relevance&q='
-			+ editTitle
-			+ '+'
-			+ year
-			// +
-			// '+official+movie+trailer+-honest+-review+-unofficial+-teaser&type=video&videoDefinition=standard&videoDuration=short&videoEmbeddable=true&key=AIzaSyAV3CqSGsBZ-SiW90bzYfLrCf-lQgq9JZs';
-			+ '+official+movie+trailer+-honest+-review+-unofficial+-teaser&type=video&videoDefinition=any&videoDuration=short&videoEmbeddable=true&key=AIzaSyAV3CqSGsBZ-SiW90bzYfLrCf-lQgq9JZs';
+		+ editTitle
+		+ '+'
+		+ year
+		+ '+official+movie+trailer+-honest+-review+-unofficial+-teaser+-español+-russian+-italiano+-German+-Deutch+-Greek+-CZ+-PL+-clip&type=video&videoDefinition=standard&videoDuration=short&videoEmbeddable=true&key=AIzaSyAV3CqSGsBZ-SiW90bzYfLrCf-lQgq9JZs';
 }
 
 function getXML() {
@@ -176,7 +185,8 @@ function onPlayerReady(event) {
 	event.target.playVideo();
 }
 
-function getRelatedMovies(actors) {
+
+function getRelatedMovies(actors, movieTitle){
 	var actor = actors.split(", ");
 	var url = 'http://api.tmdb.org/3/search/person?api_key=1ca35d6808f235b4bee12b69f15687ed&query='
 
@@ -188,24 +198,40 @@ function getRelatedMovies(actors) {
 		var editName = actor[i].split(' ').join('\%20');
 		var editURL = '';
 		editURL = url + editName;
-
-		$
-				.getJSON(
-						editURL,
-						function(data) {
-							for (x = 0; x < 3; x++) {
-								var knownFor = data['results'][0]['known_for'][x]['original_title'];
-
-								if (theMovieTitle != knownFor
-										&& !movieArray.includes(knownFor)) {
-									movieArray.push(knownFor);
-								}
-							}
-						});
+		console.log(actor[i]);
+		
+		$.getJSON(editURL, function(data) {
+			
+			for(x = 0; x < 3; x++){
+				var knownFor = data['results'][0]['known_for'][x]['original_title'];
+				
+				
+				if(movieTitle != knownFor && !movieArray.includes(knownFor) && knownFor != null){	
+					movieArray.push(knownFor);
+					addRelatedMovie(knownFor);
+				}
+			}
+		});
 	}
-	getRelatedPosters(movieArray);
 }
 
-function getRelatedPosters(movies) {
-	console.log(movies);
+function addRelatedMovie(title){
+	$.ajax({
+		url : 'http://omdbapi.com/?t=' + title
+		+ '&apikey=bbba3eae',
+		headers : {
+			"Accept" : "application/json"
+		}
+	}).done(function(data) {
+			poster = data['Poster'];
+			newTitle = data['Title'];
+			relatedMovie = '<td><img src="' + poster + '" onclick="resetInfoPage();getAllInfo(\'' + newTitle + '\')"></td>';
+			$('#relatedMoviesTable').append(relatedMovie);	
+	});
+}
+
+function resetInfoPage(){
+	$('#infoPage').hide(0);
+	player.destroy();
+	$('#relatedMoviesTable').html('<tr><th>Liknande filmer:</th></tr>');
 }

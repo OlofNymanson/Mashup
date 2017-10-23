@@ -15,17 +15,23 @@
 	<section id="frontPage">
 		<h1>FILMÄLSKAREN</h1>
 		<p id="info">
-			Välkommen till Filmälskaren!<br> 
-			Ange en film nedan, med eller utan år, för att få handling och trailer!
+			Välkommen till Filmälskaren!<br> Ange en film nedan, med eller
+			utan år, för att få handling och trailer!
 		</p>
-		
-		<input id="nameBox" onfocus="if (this.value=='Name') this.value = ''" type="text" value="Name"></input>		
-		<input id="yearBox" onfocus="if (this.value=='Year') this.value = ''" type="text" value="Year"></input>
-		
-		
+
+		<input id="nameBox" onfocus="if (this.value=='Name') this.value = ''"
+			type="text" value="Name"
+			onkeydown="if (event.keyCode == 13)
+                        document.getElementById('btn1').click()"></input>
+		<input id="yearBox" onfocus="if (this.value=='Year') this.value = ''"
+			type="text" value="Year"
+			onkeydown="if (event.keyCode == 13)
+                        document.getElementById('btn1').click()"></input>
+
+
 		<button type="button" id="btn1"
 			onclick="getMovieTitle(document.getElementById('nameBox').value, document.getElementById('yearBox').value);">SÖK</button>
-			
+
 		<h2 id="tableHeader"></h2>
 		<table id="movieTable">
 		</table>
@@ -35,19 +41,55 @@
 		<section id="moviePoster"></section>
 
 		<div id="player"></div>
-
+		
 		<section id="headers">
 			<h3 id="movieTitle"></h3>
-			<h4 id="movieDirector"></h4>
-			<h4 id="movieActors"></h4>
-			<h4 id="movieGenre"></h4>
-			<h4 id="movieYear"></h4>
-			<h4 id="movieLength"></h4>
-			<h4 id="movieRating"></h4>
+
+			<div id="directorInfo">
+				<h4 id="movieDirector"></h4>
+				<h4 id="movieDirectorInfo"></h4>
+			</div>
+
+			<div id="actorsInfo">
+				<h4 id="movieActors"></h4>
+				<h4 id="movieActorsInfo"></h4>
+			</div>
+
+			<div id="genreInfo">
+				<h4 id="movieGenre"></h4>
+				<h4 id="movieGenreInfo"></h4>
+			</div>
+
+			<div id="yearInfo">
+				<h4 id="movieYear"></h4>
+				<h4 id="movieYearInfo"></h4>
+			</div>
+
+			<div id="lengthInfo">
+				<h4 id="movieLength"></h4>
+				<h4 id="movieLengthInfo"></h4>
+			</div>
+
+			<div id="ratingInfo">
+				<h4 id="movieRating"></h4>
+				<h4 id="movieRatingInfo"></h4>
+			</div>
+
 		</section>
+
 		<p id="moviePlot"></p>
 
-		<table id="relatedMoviesTable"></table>
+		<section id="relatedMovies">
+		<table id="relatedMoviesTable">
+		<tr>
+		<th>
+			Liknande filmer:
+		</th>
+		</tr>
+		<tr>
+		</tr>
+		</table>
+		</section>
 		<button id="btnBack" onclick="hideInfoShowSearch()">Tillbaka</button>
 	</section>
 </body>
