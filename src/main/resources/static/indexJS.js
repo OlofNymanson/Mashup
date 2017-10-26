@@ -3,7 +3,7 @@ function getMovieTitle(movieTitle, movieYear) {
 
 		$.ajax(
 				{
-					url : 'http://omdbapi.com/?t=' + movieTitle
+					url : 'https://omdbapi.com/?t=' + movieTitle
 							+ '&plot=full&apikey=bbba3eae',
 					headers : {
 						"Accept" : "application/json"
@@ -18,7 +18,7 @@ function getMovieTitle(movieTitle, movieYear) {
 	} else {
 		$.ajax(
 				{
-					url : 'http://omdbapi.com/?t=' + movieTitle + '&y='
+					url : 'https://omdbapi.com/?t=' + movieTitle + '&y='
 							+ movieYear + '&plot=full&apikey=bbba3eae',
 					headers : {
 						"Accept" : "application/json"
@@ -41,10 +41,10 @@ function getMoviePoster(movieTitle, movieYear) {
 
 	var url;
 	if (movieYear == "" || movieYear == "Year") {
-		url = 'http://omdbapi.com/?t=' + movieTitle
+		url = 'https://omdbapi.com/?t=' + movieTitle
 				+ '&plot=full&apikey=bbba3eae';
 	} else {
-		url = 'http://omdbapi.com/?t=' + movieTitle + '&y=' + movieYear
+		url = 'https://omdbapi.com/?t=' + movieTitle + '&y=' + movieYear
 				+ '&plot=full&apikey=bbba3eae';
 	}
 
@@ -79,10 +79,10 @@ function getAllInfo(movieTitle) {
 
 	var url;
 	if (movieYear == "" || movieYear == "year") {
-		url = 'http://omdbapi.com/?t=' + movieTitle
+		url = 'https://omdbapi.com/?t=' + movieTitle
 				+ '&plot=full&apikey=bbba3eae';
 	} else {
-		url = 'http://omdbapi.com/?t=' + movieTitle + '&y=' + movieYear
+		url = 'https://omdbapi.com/?t=' + movieTitle + '&y=' + movieYear
 				+ '&plot=full&apikey=bbba3eae';
 	}
 
@@ -181,7 +181,7 @@ function onPlayerReady(event) {
 
 function getRelatedMovies(actors, movieTitle){
 	var actor = actors.split(", ");
-	var url = 'http://api.tmdb.org/3/search/person?api_key=1ca35d6808f235b4bee12b69f15687ed&query='
+	var url = 'https://api.tmdb.org/3/search/person?api_key=1ca35d6808f235b4bee12b69f15687ed&query='
 
 	var movieArray = [];
 	
@@ -209,7 +209,7 @@ function getRelatedMovies(actors, movieTitle){
 
 function addRelatedMovie(title){
 	$.ajax({
-		url : 'http://omdbapi.com/?t=' + title
+		url : 'https://omdbapi.com/?t=' + title
 		+ '&apikey=bbba3eae',
 		headers : {
 			"Accept" : "application/json"
