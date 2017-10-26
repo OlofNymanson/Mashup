@@ -20,7 +20,11 @@ h1 {
 	cursor: pointer;
 	border-style: solid;
 	border-color: #f78d31;
-	border-width: 3px;	
+	border-width: 2px;	
+
+	
+	
+	 
 }
 
 #relatedMoviesTable:hover{
@@ -41,6 +45,14 @@ h1 {
 
 #movieTable {
 	margin: auto;
+	border-style: solid;
+	border-color: #303133;
+	border-width: 2px;	
+	
+	 -webkit-transition: border-color 0.5s linear; /* Saf3.2+, Chrome */
+     -moz-transition: border-color 0.5s linear; /* FF3.7+ */
+       -o-transition: border-color 0.5s linear; /* Opera 10.5 */
+          transition: border-color 0.5s linear;
 }
 
 img {
