@@ -16,6 +16,17 @@ h1 {
 	color: #f78d31;
 }
 
+#movieTable:hover{
+	cursor: pointer;
+	border-style: solid;
+	border-color: #f78d31;
+	border-width: 3px;	
+}
+
+#relatedMoviesTable:hover{
+	cursor: pointer;
+}
+
 #nameBox{
 	width: 275px;
 }
@@ -131,9 +142,14 @@ img {
 	bottom: 180px;
 }
 
+#relatedMovies h3{
+	position: relative;
+	bottom:225px;
+	color: #f78d31;
+}
 
 #relatedMoviesTable{
 	margin:auto;
 	position: relative;
-	bottom: 200px;
+	bottom: 225px;
 }

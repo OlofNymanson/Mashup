@@ -146,8 +146,7 @@ function setHttpURL(title, year) {
 		+ editTitle
 		+ '+'
 		+ year
-		+ '+official+movie+trailer+-honest+-review+-unofficial+-teaser+-español+-russian+-italiano+-German+-Deutch+-Greek+-CZ+-PL+-clip&type=video&videoDefinition=standard&videoDuration=short&videoEmbeddable=true&key=AIzaSyAV3CqSGsBZ-SiW90bzYfLrCf-lQgq9JZs';
-
+		+ '+official+movie+trailer+-honest+-review+-unofficial+-teaser+-espa\ñol+-russian+-italiano+-German+-Deutch+-Greek+-CZ+-PL+-clip&relevanceLanguage=en&type=video&videoDuration=short&videoEmbeddable=true&key=AIzaSyAV3CqSGsBZ-SiW90bzYfLrCf-lQgq9JZs';
 }
 
 function getXML() {
@@ -225,5 +224,5 @@ function addRelatedMovie(title){
 function resetInfoPage(){
 	$('#infoPage').hide(0);
 	player.destroy();
-	$('#relatedMoviesTable').html('<tr><th>Liknande filmer:</th></tr>');
+	$('#relatedMoviesTable').html('<tr></tr>');
 }
