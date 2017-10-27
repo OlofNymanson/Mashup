@@ -143,10 +143,10 @@ var videoId;
 function setHttpURL(title, year) {
 	var editTitle = title.split(' ').join('+');
 	httpURL = 'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&order=relevance&q='
-		+ editTitle
-		+ '+'
-		+ year
-		+ '+official+movie+trailer+-honest+-review+-unofficial+-teaser+-espa\ñol+-russian+-italiano+-German+-Deutch+-Greek+-CZ+-PL+-clip&relevanceLanguage=en&type=video&videoDuration=short&videoEmbeddable=true&key=AIzaSyAV3CqSGsBZ-SiW90bzYfLrCf-lQgq9JZs';
+			+ editTitle
+			+ '+'
+			+ year
+			+ '+official+movie+trailer+-honest+-review+-unofficial+-teaser+-espa\ñol+-russian+-italiano+-German+-Deutch+-Greek+-CZ+-PL+-clip&relevanceLanguage=en&type=video&videoDuration=short&videoEmbeddable=true&key=AIzaSyAV3CqSGsBZ-SiW90bzYfLrCf-lQgq9JZs';
 }
 
 function getXML() {
