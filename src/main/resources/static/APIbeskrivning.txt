@@ -1,0 +1,28 @@
+API-BESKRIVNING 
+
+Lägg till "Accept:application/json" i headern.
+
+lägg till "GET" i "method"
+
+Lägg till "/filmnamn" till URL:en.
+
+Gör requesten.
+
+Använd returdatan(json) till dina behov.
+
+
+GET /{FilmNamn}
+
+Hämtar en film. Ger filmens titel,  länk tillposter, länk till trailer, skådespelare, genre, år, längd, imdb-betyg, Handlningstext, regissör.
+
+
+INDATA
+
+ingen indata
+
+
+RETURDATA
+
+Någon Jsonfil med en specifik struktur.  
+
+
