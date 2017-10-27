@@ -16,27 +16,22 @@ body {
 	color: #f78d31;
 }
 
-
-#movieTable:hover{
+#movieTable:hover {
 	cursor: pointer;
 	border-style: solid;
 	border-color: #f78d31;
-	border-width: 2px;	
-
-	
-	
-	 
+	border-width: 2px;
 }
 
-#relatedMoviesTable:hover{
+#relatedMoviesTable:hover {
 	cursor: pointer;
 }
 
-#nameBox{
+#nameBox {
 	width: 275px;
 }
 
-#yearBox{
+#yearBox {
 	width: 75px;
 }
 
@@ -48,12 +43,12 @@ body {
 	margin: auto;
 	border-style: solid;
 	border-color: #303133;
-	border-width: 2px;	
+	border-width: 2px;
 	
-	 -webkit-transition: border-color 0.5s linear; /* Saf3.2+, Chrome */
-     -moz-transition: border-color 0.5s linear; /* FF3.7+ */
-       -o-transition: border-color 0.5s linear; /* Opera 10.5 */
-          transition: border-color 0.5s linear;
+	-webkit-transition: border-color 0.5s linear; /* Saf3.2+, Chrome */
+	-moz-transition: border-color 0.5s linear; /* FF3.7+ */
+	-o-transition: border-color 0.5s linear; /* Opera 10.5 */
+	transition: border-color 0.5s linear;
 }
 
 img {
@@ -81,51 +76,51 @@ img {
 	bottom: 310px;
 }
 
-#directorsInfo{
+#directorsInfo {
 	padding: 10px 0px;
 }
 
-#directorInfo h4{
+#directorInfo h4 {
 	display: inline;
 }
 
-#actorsInfo{
+#actorsInfo {
 	padding: 10px 0px;
 }
 
-#actorsInfo h4{
+#actorsInfo h4 {
 	display: inline;
 }
 
-#genreInfo{
-	padding: 10px 0px;	
-}
-
-#genreInfo h4{
-	display: inline;
-}
-
-#yearInfo{
+#genreInfo {
 	padding: 10px 0px;
 }
 
-#yearInfo h4{
+#genreInfo h4 {
 	display: inline;
 }
 
-#lengthInfo{
+#yearInfo {
 	padding: 10px 0px;
 }
 
-#lengthInfo h4{
+#yearInfo h4 {
 	display: inline;
 }
 
-#ratingInfo{
+#lengthInfo {
 	padding: 10px 0px;
 }
 
-#ratingInfo h4{
+#lengthInfo h4 {
+	display: inline;
+}
+
+#ratingInfo {
+	padding: 10px 0px;
+}
+
+#ratingInfo h4 {
 	display: inline;
 }
 
@@ -150,23 +145,23 @@ img {
 	bottom: 300px;
 }
 
-#btnBack{
-	position:relative;
+#btnBack {
+	position: relative;
 	bottom: 180px;
 }
 
-#btnBack:hover{
+#btnBack:hover {
 	cursor: pointer;
 }
 
-#relatedMovies h3{
+#relatedMovies h3 {
 	position: relative;
-	bottom:225px;
+	bottom: 225px;
 	color: #f78d31;
 }
 
-#relatedMoviesTable{
-	margin:auto;
+#relatedMoviesTable {
+	margin: auto;
 	position: relative;
 	bottom: 225px;
 }
