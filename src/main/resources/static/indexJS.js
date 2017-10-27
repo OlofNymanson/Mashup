@@ -1,3 +1,8 @@
+/*
+ * Här hämtas filmens "riktiga" titel från OMDB API. Titeln används för att kunna få rätt resultat från de andra API-sökningarna.
+ * Om år anges så inkluderas det i sökningen för bättre resultat, annars söks det bara efter filmtitel.
+ * Sen skapas rubriken för sökresultatet och kallar på metoden getMoviePoster
+ */
 function getMovieTitle(movieTitle, movieYear) {
 	if (movieYear == "" || movieYear == "Year") {
 
@@ -14,7 +19,7 @@ function getMovieTitle(movieTitle, movieYear) {
 		});
 
 		getMoviePoster(movieTitle);
-
+		
 	} else {
 		$.ajax(
 				{
@@ -25,20 +30,22 @@ function getMovieTitle(movieTitle, movieYear) {
 					}
 				}).done(
 				function(data) {
-					movieTitle = data['Title'];
+					movieTitle = data['Title'];+
 					$('#tableHeader').html(
 							'Sökresultat för: ' + movieTitle + ' Från år: '
 									+ movieYear);
 				});
 
 		getMoviePoster(movieTitle, movieYear);
-
 	}
-
 }
 
+/*
+ * Här hämtas filmens poster för sökresultatet på förstasidan.
+ * Om år angavs i sökningen så inklduderas det i sökningen, annars inte.
+ * Sedan placeras den och filmens titel i en tabell. Klickar man på bilden så kallas metoden getAllInfo.
+ */
 function getMoviePoster(movieTitle, movieYear) {
-
 	var url;
 	if (movieYear == "" || movieYear == "Year") {
 		url = 'https://omdbapi.com/?t=' + movieTitle
@@ -74,6 +81,11 @@ function getMoviePoster(movieTitle, movieYear) {
 			});
 }
 
+/*
+ * Här hämtas all info som behövs för infosidan från OMDB API. Sökningen görs med titeln man fick från metoden getMovieTitle.
+ * Om år angetts så inkluderas det i sökningen. Den data som hämtas är titel, genre, år, speltid, imdb-betyg, handling, poster, skådespelare och regissör.
+ * Datan som hämtas placeras i passande HTML-rubrik. Sedan kallas metoderna setHttpURL, getVideoId och getRelatedMovies.
+ */
 function getAllInfo(movieTitle) {
 	$('#frontPage').hide(1000);
 
@@ -120,7 +132,7 @@ function getAllInfo(movieTitle) {
 		$('#moviePlot').html(plot);
 
 		setHttpURL(title, year);
-		getXML();
+		getVideoId();
 		getRelatedMovies(actors, title);
 
 		$('#movieTitle').css('text-decoration','underline');
@@ -128,6 +140,9 @@ function getAllInfo(movieTitle) {
 	});
 }
 
+/*
+ * metod som gömmer infosidan och visar förstasidan
+ */
 function hideInfoShowSearch() {
 	$('#infoPage').hide(0);
 	$('#frontPage').show(1000);
@@ -140,29 +155,42 @@ function hideInfoShowSearch() {
 var httpURL;
 var videoId;
 
+/*
+ * skapar URLen som används för sökningen i Youtube-APIet.
+ * URLen specifierar vad som ska vara med eller inte i resultatet. Resultatet utgår utifrån relevansen av sökningen.
+ * Vad som ingår i sökningen är: titeln, året, 'official', 'movie', 'trailer'. 
+ * Vad som inte får ingå är: 'honest', 'review', 'unofficial', 'teaser', 'clip', och ett par andra språk som brukar vara istället för engelska
+ */
 function setHttpURL(title, year) {
 	var editTitle = title.split(' ').join('+');
 	httpURL = 'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&order=relevance&q='
-			+ editTitle
-			+ '+'
-			+ year
-			+ '+official+movie+trailer+-honest+-review+-unofficial+-teaser+-espa\ñol+-russian+-italiano+-German+-Deutch+-Greek+-CZ+-PL+-clip&relevanceLanguage=en&type=video&videoDuration=short&videoEmbeddable=true&key=AIzaSyAV3CqSGsBZ-SiW90bzYfLrCf-lQgq9JZs';
+
+		+ editTitle
+		+ '+'
+		+ year
+		+ '+official+movie+trailer+-honest+-review+-unofficial+-teaser+-gag+-bloopers+-#2+-espa\ñol+-russian+-italiano+-German+-Deutch+-Greek+-CZ+-PL+-clip&relevanceLanguage=en&type=video&videoDuration=short&videoEmbeddable=true&key=AIzaSyAV3CqSGsBZ-SiW90bzYfLrCf-lQgq9JZs';
 }
 
-function getXML() {
+/*
+ * metod som hämtar trailerns videoId som behövs för att få fram rätt film ur Youtube-APIet.
+ */
+function getVideoId() {
 	$.getJSON(httpURL, function(data) {
 		videoId = data['items'][0]['id']['videoId'];
 		startYT();
 	});
 }
 
-// FÖR IFRAME
+// FÖR YOUTUBE
 var tag = document.createElement('script');
 tag.src = "https://www.youtube.com/iframe_api";
 var firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 var player;
 
+/*
+ * metod som sätter igång skapar en YoutubePlayer som visar trailern
+ */
 function startYT() {
 	player = new YT.Player('player', {
 		height : '600',
@@ -174,10 +202,23 @@ function startYT() {
 	});
 }
 
+
+/*
+ * sätter igång trailern
+ */
 function onPlayerReady(event) {
 	event.target.playVideo();
 }
 
+
+//FÖR RELATERADE FILMER
+
+/*
+ *	Metod som hämtar filmerna med gemensamma skådespelare.
+ *	Inparametrarna är filmtiteln och 4 skådespelarena. Skådespelarna är (oftast) ordnade efter vilken roll de har i filmen (huvudpersonerna först).
+ *	De första två skådespelarna används för anrop till TMDB APIet för att hämta ut högst 3 filmer var.
+ *	När filmerna hämtas skickas deras titlar till metoden addRelatedMovie 
+ */
 function getRelatedMovies(actors, movieTitle){
 	var actor = actors.split(", ");
 	var url = 'https://api.tmdb.org/3/search/person?api_key=1ca35d6808f235b4bee12b69f15687ed&query='
@@ -206,6 +247,10 @@ function getRelatedMovies(actors, movieTitle){
 	}
 }
 
+/*
+ *	Metod som hämtar de relaterade filmernas posters och titel från OMDB API och lägger dem i en tabell i infosidan.
+ *	När man klickar på en av filmerna kallas metoderna resetInfoPage och getAllInfo med filmens titel som inparameter.
+ */
 function addRelatedMovie(title){
 	$.ajax({
 		url : 'https://omdbapi.com/?t=' + title
@@ -221,6 +266,9 @@ function addRelatedMovie(title){
 	});
 }
 
+/*
+ * nollställer tabellen med relaterade filmer och gömmer infosidan.
+ */
 function resetInfoPage(){
 	$('#infoPage').hide(0);
 	player.destroy();

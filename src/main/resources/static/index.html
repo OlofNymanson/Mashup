@@ -12,8 +12,9 @@
 
 </head>
 <body>
+	<h1 id="mainHeader">FILMÄLSKAREN</h1>	
+
 	<section id="frontPage">
-		<h1>FILMÄLSKAREN</h1>
 		<p id="info">
 			Välkommen till Filmälskaren!<br> Ange en film nedan, med eller
 			utan år, för att få handling och trailer!
@@ -33,8 +34,12 @@
 			onclick="getMovieTitle(document.getElementById('nameBox').value, document.getElementById('yearBox').value);">SÖK</button>
 
 		<h2 id="tableHeader"></h2>
+		
+		<!-- Här kommer resulatet hamna -->
 		<table id="movieTable">
 		</table>
+		
+		
 	</section>
 
 	<section id="infoPage" style="display: none;">
