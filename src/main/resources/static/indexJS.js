@@ -32,9 +32,7 @@ function getMovieTitle(movieTitle, movieYear) {
 				});
 
 		getMoviePoster(movieTitle, movieYear);
-
 	}
-
 }
 
 function getMoviePoster(movieTitle, movieYear) {
@@ -177,6 +175,9 @@ function startYT() {
 function onPlayerReady(event) {
 	event.target.playVideo();
 }
+
+
+//FÖR RELATERADE FILMER
 
 function getRelatedMovies(actors, movieTitle){
 	var actor = actors.split(", ");

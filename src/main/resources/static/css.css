@@ -12,9 +12,10 @@ body {
 	font-family: Montserrat Alternates;
 }
 
-h1 {
+#mainHeader {
 	color: #f78d31;
 }
+
 
 #movieTable:hover{
 	cursor: pointer;
@@ -140,6 +141,10 @@ img {
 #btnBack{
 	position:relative;
 	bottom: 180px;
+}
+
+#btnBack:hover{
+	cursor: pointer;
 }
 
 #relatedMovies h3{
