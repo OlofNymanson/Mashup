@@ -168,7 +168,7 @@ function setHttpURL(title, year) {
 		+ editTitle
 		+ '+'
 		+ year
-		+ '+official+movie+trailer+-honest+-review+-unofficial+-teaser+-gag+-bloopers+-#2+-espa\ñol+-russian+-italiano+-German+-Deutch+-Greek+-CZ+-PL+-clip&relevanceLanguage=en&type=video&videoDuration=short&videoEmbeddable=true&key=AIzaSyAV3CqSGsBZ-SiW90bzYfLrCf-lQgq9JZs';
+		+ '+official+movie+trailer+-honest+-review+-unofficial+-teaser+-gag+-bloopers+-espa\ñol+-russian+-italiano+-German+-Deutch+-Greek+-CZ+-PL+-clip&relevanceLanguage=en&type=video&videoDuration=short&videoEmbeddable=true&key=AIzaSyAV3CqSGsBZ-SiW90bzYfLrCf-lQgq9JZs';
 }
 
 /*
